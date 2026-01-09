@@ -1,26 +1,157 @@
 @import "tailwindcss";
 
+/* OOMA Padel & Eatery - Custom Theme Configuration */
+@theme {
+  /* Primary Colors - Sage Green / Deep Forest */
+  --color-primary-50: #f0f7f4;
+  --color-primary-100: #dceee5;
+  --color-primary-200: #b9ddcb;
+  --color-primary-300: #8ec5ab;
+  --color-primary-400: #5fa687;
+  --color-primary-500: #3f8a6c;
+  --color-primary-600: #2f6e56;
+  --color-primary-700: #275846;
+  --color-primary-800: #224739;
+  --color-primary-900: #1d3b30;
+  --color-primary-950: #0f221c;
+
+  /* Secondary Colors - Warm Beige / Sand */
+  --color-secondary-50: #faf8f5;
+  --color-secondary-100: #f5f0e8;
+  --color-secondary-200: #e8ddc9;
+  --color-secondary-300: #d9c5a3;
+  --color-secondary-400: #c9a876;
+  --color-secondary-500: #bd9159;
+  --color-secondary-600: #af7c4d;
+  --color-secondary-700: #916341;
+  --color-secondary-800: #765139;
+  --color-secondary-900: #604330;
+  --color-secondary-950: #342218;
+
+  /* Accent Colors - Terracotta / Burnt Orange */
+  --color-accent-50: #fdf4f3;
+  --color-accent-100: #fce7e4;
+  --color-accent-200: #fad3cd;
+  --color-accent-300: #f5b4a9;
+  --color-accent-400: #ed8a78;
+  --color-accent-500: #e0654e;
+  --color-accent-600: #cd4a33;
+  --color-accent-700: #ab3b28;
+  --color-accent-800: #8d3425;
+  --color-accent-900: #753025;
+  --color-accent-950: #3f160f;
+
+  /* Neutral Colors (Soft Black) */
+  --color-neutral-50: #fafafa;
+  --color-neutral-100: #f5f5f5;
+  --color-neutral-200: #e5e5e5;
+  --color-neutral-300: #d4d4d4;
+  --color-neutral-400: #a3a3a3;
+  --color-neutral-500: #737373;
+  --color-neutral-600: #525252;
+  --color-neutral-700: #404040;
+  --color-neutral-800: #262626;
+  --color-neutral-900: #1a1a1a;
+  --color-neutral-950: #0f0f0f;
+
+  /* Border Radius */
+  --radius-pill: 9999px;
+
+  /* Box Shadows */
+  --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-soft-md: 0 4px 16px rgba(0, 0, 0, 0.1);
+  --shadow-soft-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+
+  /* Font Families */
+  --font-playfair: var(--font-playfair-display);
+  --font-inter: var(--font-inter-sans);
+}
+
+/* Custom CSS Variables for semantic colors */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Background & Foreground */
+  --background: #faf8f5;
+  --foreground: #1a1a1a;
+
+  /* Primary Colors */
+  --primary: #3f8a6c;
+  --primary-foreground: #ffffff;
+
+  /* Secondary Colors */
+  --secondary: #e8ddc9;
+  --secondary-foreground: #1a1a1a;
+
+  /* Accent Colors */
+  --accent: #e0654e;
+  --accent-foreground: #ffffff;
+
+  /* Neutral */
+  --muted: #f5f5f5;
+  --muted-foreground: #737373;
+
+  /* Border */
+  --border: #e5e5e5;
+  --radius: 0.5rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Base Styles */
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-feature-settings: "rlig" 1, "calt" 1;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--muted);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2f6e56;
+}
+
+/* Custom Animations for Premium Design */
+@keyframes blob {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+
+  100% {
+    transform: translate(0px, 0px) scale(1);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.animate-blob {
+  animation: blob 7s infinite;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
 }

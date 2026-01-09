@@ -48,6 +48,12 @@ const config: Config = {
           900: '#5c5144',
         },
       },
+      fontFamily: {
+        sans: ['var(--font-inter-sans)', 'system-ui', 'sans-serif'],
+        serif: ['var(--font-playfair-display)', 'Georgia', 'serif'],
+        sackers: ['var(--font-sackers)', 'Georgia', 'serif'],
+        mono: ['var(--font-geist-mono)', 'monospace'],
+      },
     },
   },
 };

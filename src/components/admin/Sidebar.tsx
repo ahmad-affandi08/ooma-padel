@@ -12,6 +12,9 @@ import {
   Settings,
   LogOut,
   Tags,
+  Store,
+  PieChart,
+  ChefHat
 } from 'lucide-react'
 
 interface SidebarProps {
@@ -21,6 +24,9 @@ interface SidebarProps {
 
 const menuItems = [
   { icon: LayoutDashboard, label: 'Dashboard', href: '/admin/dashboard' },
+  { icon: Store, label: 'Kasir / POS', href: '/admin/pos' },
+  { icon: PieChart, label: 'Laporan', href: '/admin/reports' },
+  { icon: ChefHat, label: 'Kitchen / Dapur', href: '/admin/kitchen' },
   { icon: UtensilsCrossed, label: 'Menu', href: '/admin/menu' },
   { icon: Tags, label: 'Kategori', href: '/admin/categories' },
   { icon: Calendar, label: 'Booking', href: '/admin/bookings' },
@@ -48,7 +54,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
       >
         <div className="flex flex-col h-full">
           {/* Logo */}
-          <div className="p-6 border-b border-sage-200">
+          <div className="p-4 border-b border-sage-200">
             <Link href="/admin/dashboard" className="flex items-center gap-3">
               <Image
                 src="/logohitam.png"
@@ -59,7 +65,6 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
                 priority
               />
             </Link>
-            <p className="text-xs text-sage-600 mt-2">Admin Portal</p>
           </div>
 
           {/* Navigation */}

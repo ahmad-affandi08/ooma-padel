@@ -4,7 +4,22 @@ import bcrypt from 'bcryptjs'
 const prisma = new PrismaClient()
 
 // Data Menu Lengkap dari PDF OOMA
-const menuData = [
+interface MenuItemSeed {
+  name: string
+  price: number
+  description: string
+  isChefRec?: boolean
+  isSpicy?: boolean
+}
+
+interface MenuCategory {
+  categoryName: string
+  categorySlug: string
+  order: number
+  items: MenuItemSeed[]
+}
+
+const menuData: MenuCategory[] = [
   {
     categoryName: 'Kitchen',
     categorySlug: 'kitchen',

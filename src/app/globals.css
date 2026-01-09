@@ -1,5 +1,30 @@
 @import "tailwindcss";
 
+/* Sackers Gothic Font */
+@font-face {
+  font-family: 'Sackers Gothic';
+  src: url('/fonts/SackersGothicLight.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Sackers Gothic';
+  src: url('/fonts/SackersGothicMedium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Sackers Gothic';
+  src: url('/fonts/SackersGothicHeavy.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* OOMA Padel & Eatery - Custom Theme Configuration */
 @theme {
   /* Primary Colors - OOMA Burnt Orange (Signature) */
@@ -168,4 +193,16 @@ label,
 select,
 option {
   cursor: pointer;
+}
+
+/* Drop Cap Typography for Logo Tagline */
+.logo-tagline {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.25rem;
+}
+
+.logo-tagline .drop-cap {
+  font-size: 1.5em;
+  line-height: 1;
 }

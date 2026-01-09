@@ -8,8 +8,10 @@ import { Plus, Search, Filter, Loader2, Trash2, Edit2, X, Image as ImageIcon } f
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { Modal } from '@/components/ui/Modal'
+import { ConfirmDialog } from '@/components/ui/ConfirmDialog'
+import { toast } from 'sonner'
 
-// Simplified types to avoid importing full Prisma client in client component
+// Simplified types
 interface Category {
   id: string
   name: string
@@ -55,10 +57,13 @@ export default function MenuPage() {
   const [isUploading, setIsUploading] = useState(false)
   const [editingItem, setEditingItem] = useState<MenuItem | null>(null)
 
+  // Delete Dialog State
+  const [deleteId, setDeleteId] = useState<string | null>(null)
+
   // Filter States
   const [isFilterOpen, setIsFilterOpen] = useState(false)
   const [filterCategory, setFilterCategory] = useState('')
-  const [filterAvailability, setFilterAvailability] = useState('all') // all, available, unavailable
+  const [filterAvailability, setFilterAvailability] = useState('all')
   const [filterSpicy, setFilterSpicy] = useState(false)
   const [filterChefRec, setFilterChefRec] = useState(false)
 
@@ -72,7 +77,7 @@ export default function MenuPage() {
     }
   }, [status, router])
 
-  // Fetch Data (Items & Categories)
+  // Fetch Data
   const fetchData = async () => {
     try {
       setIsLoading(true)
@@ -90,22 +95,20 @@ export default function MenuPage() {
       setCategories(catsData)
     } catch (error) {
       console.error('Error loading data:', error)
+      toast.error('Gagal memuat data menu')
     } finally {
       setIsLoading(false)
     }
   }
 
   useEffect(() => {
-    if (status === 'authenticated') {
-      fetchData()
-    }
+    if (status === 'authenticated') fetchData()
   }, [status])
 
   // Handlers
   const handleOpenAdd = () => {
     setEditingItem(null)
     setFormData(defaultFormData)
-    // Set default category if available
     if (categories.length > 0) {
       setFormData(prev => ({ ...prev, categoryId: categories[0].id }))
     }
@@ -127,18 +130,29 @@ export default function MenuPage() {
     setIsModalOpen(true)
   }
 
-  const handleDelete = async (id: string) => {
-    if (!confirm('Apakah Anda yakin ingin menghapus menu ini?')) return
+  // Delete Handler - Phase 1: Open Dialog
+  const handleDeleteRequest = (id: string) => {
+    setDeleteId(id)
+  }
 
-    try {
-      const res = await fetch(`/api/menu/${id}`, { method: 'DELETE' })
+  // Delete Handler - Phase 2: Confirm Action
+  const handleConfirmDelete = async () => {
+    if (!deleteId) return
+
+    const promise = async () => {
+      const res = await fetch(`/api/menu/${deleteId}`, { method: 'DELETE' })
       if (!res.ok) throw new Error('Gagal menghapus')
 
-      // Optimistic update
-      setMenuItems(prev => prev.filter(item => item.id !== id))
-    } catch (error) {
-      alert('Gagal menghapus menu')
+      setMenuItems(prev => prev.filter(item => item.id !== deleteId))
+      setDeleteId(null) // Close dialog
+      return 'Menu berhasil dihapus'
     }
+
+    toast.promise(promise, {
+      loading: 'Menghapus menu...',
+      success: (data) => data,
+      error: 'Gagal menghapus menu'
+    })
   }
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -149,36 +163,37 @@ export default function MenuPage() {
     const uploadData = new FormData()
     uploadData.append('file', file)
 
-    try {
+    const uploadPromise = async () => {
       const res = await fetch('/api/upload', {
         method: 'POST',
         body: uploadData,
       })
-
       if (!res.ok) {
         const errorData = await res.json()
-        throw new Error(errorData.details || errorData.message || 'Upload gagal')
+        throw new Error(errorData.details || 'Upload gagal')
       }
-
       const data = await res.json()
       if (data.success) {
         setFormData(prev => ({ ...prev, imageUrl: data.url }))
+        return 'Foto berhasil diupload'
       } else {
         throw new Error(data.message || 'Upload gagal')
       }
-    } catch (error) {
-      console.error('Error uploading image:', error)
-      alert(`Gagal mengupload gambar: ${error instanceof Error ? error.message : 'Unknown error'}`)
-    } finally {
-      setIsUploading(false)
     }
+
+    toast.promise(uploadPromise, {
+      loading: 'Mengupload foto...',
+      success: (msg) => msg,
+      error: (err) => `Upload gagal: ${err.message}`
+    })
+    setIsUploading(false)
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
 
-    try {
+    const submitPromise = async () => {
       const url = editingItem ? `/api/menu/${editingItem.id}` : '/api/menu'
       const method = editingItem ? 'PUT' : 'POST'
 
@@ -190,43 +205,41 @@ export default function MenuPage() {
 
       if (!res.ok) {
         const errorData = await res.json()
-        throw new Error(errorData.details || errorData.error || 'Gagal menyimpan')
+        throw new Error(errorData.details || 'Gagal menyimpan')
       }
 
-      await fetchData() // Refresh data
+      await fetchData()
       setIsModalOpen(false)
-    } catch (error) {
-      console.error('Error saving item:', error)
-      alert(`Gagal menyimpan menu: ${error instanceof Error ? error.message : 'Silakan coba lagi'}`)
-    } finally {
-      setIsSubmitting(false)
+      return editingItem ? 'Menu berhasil diperbarui' : 'Menu baru berhasil dibuat'
     }
+
+    toast.promise(submitPromise, {
+      loading: 'Menyimpan data...',
+      success: (msg) => msg,
+      error: (err) => `Gagal menyimpan: ${err.message}`
+    })
+    setIsSubmitting(false)
   }
 
   if (status === 'loading' || isLoading) {
     return (
       <div className="flex items-center justify-center h-full">
-        <Loader2 className="w-8 h-8 text-sage-600 animate-spin" />
+        <Loader2 className="w-8 h-8 text-orange-600 animate-spin" />
       </div>
     )
   }
 
   // Filter Logic
   const filteredItems = menuItems.filter(item => {
-    // 1. Search Text
     const matchesSearch =
       item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       item.category?.name.toLowerCase().includes(searchTerm.toLowerCase())
-
-    // 2. Category
     const matchesCategory = filterCategory ? item.categoryId === filterCategory : true
 
-    // 3. Availability
     let matchesAvailability = true
     if (filterAvailability === 'available') matchesAvailability = item.isAvailable
     if (filterAvailability === 'unavailable') matchesAvailability = !item.isAvailable
 
-    // 4. Tags
     const matchesSpicy = filterSpicy ? item.isSpicy : true
     const matchesChef = filterChefRec ? item.isChefRec : true
 
@@ -247,7 +260,7 @@ export default function MenuPage() {
         </Button>
       </div>
 
-      {/* Filters & Search */}
+      {/* Filters & Search - Keep existing JSX mostly same */}
       <div className="bg-white rounded-2xl p-4 shadow-sm border border-sage-100">
         <div className="flex flex-col sm:flex-row gap-4">
           <div className="flex-1">
@@ -282,7 +295,6 @@ export default function MenuPage() {
             animate={{ height: 'auto', opacity: 1 }}
             className="mt-4 pt-4 border-t border-neutral-100 grid grid-cols-1 sm:grid-cols-3 gap-4"
           >
-            {/* Filter Kategori */}
             <div>
               <label className="block text-xs font-semibold text-neutral-500 mb-2 uppercase tracking-wide">Kategori</label>
               <select
@@ -296,8 +308,6 @@ export default function MenuPage() {
                 ))}
               </select>
             </div>
-
-            {/* Filter Status */}
             <div>
               <label className="block text-xs font-semibold text-neutral-500 mb-2 uppercase tracking-wide">Status</label>
               <select
@@ -310,8 +320,6 @@ export default function MenuPage() {
                 <option value="unavailable">Kosong (Empty)</option>
               </select>
             </div>
-
-            {/* Filter Tags */}
             <div>
               <label className="block text-xs font-semibold text-neutral-500 mb-2 uppercase tracking-wide">Atribut</label>
               <div className="flex flex-wrap gap-3 mt-1">
@@ -331,7 +339,7 @@ export default function MenuPage() {
                     onChange={(e) => setFilterChefRec(e.target.checked)}
                     className="rounded text-sage-600 focus:ring-sage-500 border-gray-300"
                   />
-                  <span className="text-sm text-neutral-600">Chef's Rec 👨‍🍳</span>
+                  <span className="text-sm text-neutral-600">Leader's Rec 👨‍🍳</span>
                 </label>
               </div>
             </div>
@@ -358,7 +366,6 @@ export default function MenuPage() {
                 {item.category?.name || 'Tanpa Kategori'}
               </div>
 
-              {/* Image Preview or Placeholder */}
               <div className="w-full h-48 mb-4 rounded-lg overflow-hidden bg-neutral-100 flex items-center justify-center border border-neutral-100">
                 {item.imageUrl ? (
                   <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover" />
@@ -402,7 +409,12 @@ export default function MenuPage() {
                   <Button variant="outline" size="sm" onClick={() => handleOpenEdit(item)} className="text-neutral-500 hover:text-sage-600">
                     <Edit2 className="w-4 h-4" />
                   </Button>
-                  <Button variant="outline" size="sm" onClick={() => handleDelete(item.id)} className="text-red-500 hover:bg-red-50 hover:text-red-700 hover:border-red-200">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => handleDeleteRequest(item.id)}
+                    className="text-red-500 hover:bg-red-50 hover:text-red-700 hover:border-red-200"
+                  >
                     <Trash2 className="w-4 h-4" />
                   </Button>
                 </div>
@@ -412,6 +424,17 @@ export default function MenuPage() {
         </div>
       )}
 
+      {/* Confirm Dialog */}
+      <ConfirmDialog
+        isOpen={!!deleteId}
+        onClose={() => setDeleteId(null)}
+        onConfirm={handleConfirmDelete}
+        title="Hapus Menu"
+        description="Apakah Anda yakin ingin menghapus menu ini? Tindakan ini tidak dapat dibatalkan."
+        confirmText="Hapus Menu"
+        variant="danger"
+      />
+
       {/* Modal Form */}
       <Modal
         isOpen={isModalOpen}
@@ -419,8 +442,6 @@ export default function MenuPage() {
         title={editingItem ? 'Edit Menu' : 'Tambah Menu Baru'}
       >
         <form onSubmit={handleSubmit} className="space-y-4">
-
-          {/* Image Upload Input */}
           <div>
             <label className="block text-sm font-medium text-neutral-700 mb-1">Foto Menu (Opsional)</label>
             <div className="flex items-start gap-4">
@@ -499,7 +520,6 @@ export default function MenuPage() {
               placeholder="Contoh: 45000"
             />
 
-            {/* Simple Toggle for Availability */}
             <div className="flex flex-col justify-end pb-3">
               <label className="flex items-center gap-2 cursor-pointer">
                 <input
@@ -523,7 +543,6 @@ export default function MenuPage() {
             />
           </div>
 
-          {/* Tags */}
           <div className="flex gap-6 pt-2">
             <label className="flex items-center gap-2 cursor-pointer">
               <input

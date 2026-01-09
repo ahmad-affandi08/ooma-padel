@@ -15,96 +15,99 @@ import {
 } from "lucide-react";
 
 import Image from "next/image";
+import { PublicMenuSection } from "@/components/public/PublicMenuSection";
 
 export default function PublicHomePage() {
   return (
     <div className="flex flex-col">
-      {/* Hero Section - Premium Design */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-primary-50 via-secondary-50 to-primary-100">
-        {/* Decorative Background Elements */}
+      {/* Hero Section */}
+      <section className="relative min-h-[85vh] md:min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-primary-50 via-secondary-50 to-accent-50">
+        {/* Animated Background Elements */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-40 -right-40 w-96 h-96 bg-primary-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30"></div>
-          <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-accent-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-secondary-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30"></div>
+          <div className="absolute top-20 left-10 w-48 h-48 md:w-72 md:h-72 bg-primary-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob" />
+          <div className="absolute top-40 right-10 w-48 h-48 md:w-72 md:h-72 bg-secondary-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000" />
+          <div className="absolute -bottom-8 left-20 w-48 h-48 md:w-72 md:h-72 bg-accent-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000" />
         </div>
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="relative z-10 text-center space-y-8 px-4 py-20"
+          className="relative z-10 text-center px-4 max-w-5xl mx-auto"
         >
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-            className="space-y-4 flex flex-col items-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="flex flex-col items-center gap-3 md:gap-6 mb-6 md:mb-8"
           >
             <Image
               src="/logohitam.png"
               alt="OOMA Padel & Eatery"
               width={600}
               height={180}
-              className="w-auto h-32 md:h-48 lg:h-56"
+              className="w-auto h-16 md:h-28 lg:h-36"
               priority
             />
-            <p className="font-playfair text-3xl md:text-5xl font-semibold text-primary-800">
-              Padel & Eatery
+            <p className="logo-tagline text-base md:text-2xl lg:text-4xl font-light text-black tracking-[0.25em] uppercase" style={{ fontFamily: "'Sackers Gothic', Georgia, serif" }}>
+              <span className="mx-2 md:mx-3 lg:mx-4">•</span>
+              <span className="drop-cap">P</span>adel <span className="mx-1">&</span> <span className="drop-cap">E</span>atery
+              <span className="mx-2 md:mx-3 lg:mx-4">•</span>
             </p>
           </motion.div>
 
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.6, duration: 0.8 }}
-            className="text-xl md:text-2xl text-neutral-700 max-w-3xl mx-auto leading-relaxed font-light"
+            transition={{ delay: 0.4, duration: 0.8 }}
+            className="text-base md:text-xl lg:text-2xl text-neutral-700 mb-3 md:mb-4 font-light max-w-3xl mx-auto"
           >
             Dimana Olahraga Bertemu Gaya Hidup
-            <span className="block mt-2 text-lg text-neutral-600">
-              Rasakan lapangan padel premium dan kuliner organik dalam suasana hangat dan natural
-            </span>
+          </motion.p>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.6, duration: 0.8 }}
+            className="text-sm md:text-base lg:text-lg text-neutral-600 mb-8 md:mb-12 max-w-2xl mx-auto leading-relaxed px-2"
+          >
+            Rasakan lapangan padel premium dan kuliner organik dalam suasana hangat dan natural
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.9, duration: 0.7 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center pt-8"
+            className="flex flex-col sm:flex-row gap-4 justify-center pt-4 md:pt-8"
           >
             <a
               href="#booking"
-              className="group px-10 py-5 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-pill font-semibold text-lg shadow-soft-lg hover:shadow-soft-md hover:from-primary-600 hover:to-primary-700 transition-all duration-300 transform hover:scale-105"
+              className="group px-8 md:px-10 py-4 md:py-5 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-pill font-semibold text-base md:text-lg shadow-soft-lg hover:shadow-soft-md hover:from-primary-600 hover:to-primary-700 transition-all duration-300 transform hover:scale-105"
             >
-              <span className="flex items-center justify-center gap-2">
-                Pesan Lapangan
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </span>
+              Pesan Lapangan
+              <span className="inline-block ml-2 group-hover:translate-x-1 transition-transform">→</span>
             </a>
             <a
               href="#menu"
-              className="group px-10 py-5 bg-white border-2 border-primary-500 text-primary-600 rounded-pill font-semibold text-lg shadow-soft hover:shadow-soft-md hover:bg-primary-50 transition-all duration-300 transform hover:scale-105"
+              className="px-8 md:px-10 py-4 md:py-5 bg-white text-primary-600 rounded-pill font-semibold text-base md:text-lg shadow-soft-lg hover:shadow-soft-md border-2 border-primary-200 hover:border-primary-400 transition-all duration-300"
             >
-              <span className="flex items-center justify-center gap-2">
-                Lihat Menu
-                <Sparkles className="w-5 h-5 group-hover:rotate-12 transition-transform" />
-              </span>
+              Lihat Menu
             </a>
           </motion.div>
-
-          {/* Scroll Indicator */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.3, duration: 0.8 }}
-            className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce"
-          >
-            <ChevronDown className="w-6 h-6 text-primary-600" />
-          </motion.div>
         </motion.div>
-      </section>
+        {/* Scroll Indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.3, duration: 0.8 }}
+          className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce"
+        >
+          <ChevronDown className="w-6 h-6 text-primary-600" />
+        </motion.div>
+      </section >
 
       {/* About Section - Enhanced */}
-      <section id="about" className="py-32 px-4 bg-white relative overflow-hidden">
+      < section id="about" className="py-32 px-4 bg-white relative overflow-hidden" >
         <motion.div
           initial={{ opacity: 0, x: 100 }}
           whileInView={{ opacity: 0.5, x: 0 }}
@@ -208,10 +211,10 @@ export default function PublicHomePage() {
             </motion.div>
           </div>
         </div>
-      </section>
+      </section >
 
       {/* Menu Highlight - Premium Grid */}
-      <section id="menu" className="py-32 px-4 bg-gradient-to-b from-secondary-50 to-white">
+      < section id="menu" className="py-32 px-4 bg-gradient-to-b from-secondary-50 to-white" >
         <div className="container mx-auto max-w-7xl">
           <div className="text-center mb-16">
             <motion.div
@@ -244,45 +247,14 @@ export default function PublicHomePage() {
             </motion.p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {/* Menu Category Cards */}
-            {[
-              { title: "Smoothie Segar", color: "from-primary-400 to-primary-600", Icon: Wine },
-              { title: "Kopi Artisan", color: "from-accent-400 to-accent-600", Icon: Coffee },
-              { title: "Bowl Sehat", color: "from-secondary-400 to-secondary-600", Icon: Salad },
-            ].map((category, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ delay: idx * 0.15, duration: 0.6 }}
-                whileHover={{ y: -8 }}
-                className="group relative bg-white rounded-3xl p-8 shadow-soft hover:shadow-soft-lg transition-all duration-300 cursor-pointer overflow-hidden"
-              >
-                <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${category.color} rounded-full transform translate-x-16 -translate-y-16 opacity-10 group-hover:opacity-20 transition-opacity`}></div>
-
-                <div className="relative z-10">
-                  <category.Icon className="w-12 h-12 mb-4 text-primary-600 group-hover:scale-110 transition-transform" />
-                  <h3 className="font-playfair text-2xl font-bold text-neutral-800 mb-3">
-                    {category.title}
-                  </h3>
-                  <p className="text-neutral-600 mb-4">
-                    Dibuat dengan penuh perhatian menggunakan bahan premium dan organik.
-                  </p>
-                  <div className="flex items-center text-primary-600 font-semibold group-hover:gap-2 transition-all">
-                    Lihat Menu
-                    <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+          <div className="mt-12">
+            <PublicMenuSection />
           </div>
         </div>
-      </section>
+      </section >
 
       {/* Courts Section - Visual Showcase */}
-      <section id="courts" className="py-32 px-4 bg-white">
+      < section id="courts" className="py-32 px-4 bg-white" >
         <div className="container mx-auto max-w-7xl">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <motion.div
@@ -365,10 +337,10 @@ export default function PublicHomePage() {
             </div>
           </div>
         </div>
-      </section>
+      </section >
 
       {/* Location Map Section */}
-      <section className="py-32 px-4 bg-secondary-50">
+      < section className="py-32 px-4 bg-secondary-50" >
         <div className="container mx-auto max-w-7xl">
           <div className="text-center mb-12">
             <motion.div

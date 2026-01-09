@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import { Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "sonner";
 
 // Sans-serif for body text (Clean, modern)
 const inter = Inter({
@@ -82,9 +83,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="id" className={`${inter.variable} ${playfair.variable} ${geistMono.variable}`}>
-      <body className="antialiased">
+    <html lang="id" className={`${inter.variable} ${playfair.variable} ${geistMono.variable}`} suppressHydrationWarning>
+      <body className="antialiased" suppressHydrationWarning>
         {children}
+        <Toaster position="top-center" richColors theme="light" />
       </body>
     </html>
   );

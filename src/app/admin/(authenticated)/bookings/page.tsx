@@ -169,7 +169,7 @@ export default function BookingsPage() {
   }
 
   if (status === 'loading' || isLoading && courts.length === 0) {
-    return <div className="flex h-full items-center justify-center"><Loader2 className="animate-spin text-sage-600" /></div>
+    return <div className="flex h-full items-center justify-center"><Loader2 className="animate-spin text-orange-600" /></div>
   }
 
   return (

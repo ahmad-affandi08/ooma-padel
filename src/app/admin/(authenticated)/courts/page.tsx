@@ -133,7 +133,7 @@ export default function CourtsPage() {
   if (status === 'loading' || isLoading) {
     return (
       <div className="flex items-center justify-center h-full">
-        <Loader2 className="w-8 h-8 text-sage-600 animate-spin" />
+        <Loader2 className="w-8 h-8 text-orange-600 animate-spin" />
       </div>
     )
   }
@@ -241,8 +241,8 @@ export default function CourtsPage() {
             <label className="block text-sm font-medium text-neutral-700 mb-2">Status</label>
             <div className="flex gap-4">
               <label className={`flex-1 flex items-center justify-center p-3 rounded-lg border cursor-pointer transition-all ${formData.isActive
-                  ? 'bg-green-50 border-green-200 text-green-700 ring-1 ring-green-500'
-                  : 'bg-white border-neutral-200 text-neutral-600 hover:bg-neutral-50'
+                ? 'bg-green-50 border-green-200 text-green-700 ring-1 ring-green-500'
+                : 'bg-white border-neutral-200 text-neutral-600 hover:bg-neutral-50'
                 }`}>
                 <input
                   type="radio"
@@ -255,8 +255,8 @@ export default function CourtsPage() {
               </label>
 
               <label className={`flex-1 flex items-center justify-center p-3 rounded-lg border cursor-pointer transition-all ${!formData.isActive
-                  ? 'bg-red-50 border-red-200 text-red-700 ring-1 ring-red-500'
-                  : 'bg-white border-neutral-200 text-neutral-600 hover:bg-neutral-50'
+                ? 'bg-red-50 border-red-200 text-red-700 ring-1 ring-red-500'
+                : 'bg-white border-neutral-200 text-neutral-600 hover:bg-neutral-50'
                 }`}>
                 <input
                   type="radio"

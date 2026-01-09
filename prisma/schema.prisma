@@ -50,6 +50,8 @@ model MenuItem {
   categoryId  String
   category    Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
   
+  orderItems  OrderItem[]
+
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   
@@ -93,4 +95,61 @@ model Booking {
   @@index([courtId])
   @@index([date])
   @@index([status])
+}
+
+enum OrderStatus {
+  PENDING
+  COMPLETED
+  CANCELLED
+}
+
+enum PaymentMethod {
+  CASH
+  QRIS
+  TRANSFER
+}
+
+model Order {
+  id            String      @id @default(cuid())
+  orderNumber   String      @unique 
+  
+  subtotal      Int
+  tax           Int
+  discount      Int         @default(0)
+  total         Int
+  
+  paymentMethod PaymentMethod
+  status        OrderStatus @default(COMPLETED)
+  
+  items         OrderItem[]
+  
+  customerName  String?
+  staffName     String?
+  notes         String?
+  
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
+
+model OrderItem {
+  id         String   @id @default(cuid())
+  
+  orderId    String
+  order      Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  
+  menuItemId String
+  menuItem   MenuItem @relation(fields: [menuItemId], references: [id])
+  
+  quantity   Int
+  price      Int      // Snapshot price per unit
+  notes      String?
+  
+  status     OrderItemStatus @default(PENDING)
+}
+
+enum OrderItemStatus {
+  PENDING
+  COOKING
+  READY
+  SERVED
 }

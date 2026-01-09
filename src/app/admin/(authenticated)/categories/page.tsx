@@ -124,7 +124,7 @@ export default function CategoriesPage() {
   if (status === 'loading' || isLoading) {
     return (
       <div className="flex items-center justify-center h-full">
-        <Loader2 className="w-8 h-8 text-sage-600 animate-spin" />
+        <Loader2 className="w-8 h-8 text-orange-600 animate-spin" />
       </div>
     )
   }

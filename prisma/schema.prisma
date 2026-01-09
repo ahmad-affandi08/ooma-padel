@@ -1,0 +1,96 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  password      String    // Hashed with bcrypt
+  role          Role      @default(USER)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Category {
+  id        String     @id @default(cuid())
+  name      String     // e.g., "Kitchen", "Coffee", "Snacks"
+  slug      String     @unique
+  order     Int        @default(0) // For custom ordering
+  items     MenuItem[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model MenuItem {
+  id          String   @id @default(cuid())
+  name        String
+  description String?  @db.Text
+  price       Int      // Price in cents/smallest currency unit
+  imageUrl    String?
+  isAvailable Boolean  @default(true)
+  
+  // Special flags from Menu Analysis
+  isSpicy     Boolean  @default(false)
+  isChefRec   Boolean  @default(false) // Chef's Recommendation
+  
+  categoryId  String
+  category    Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@index([categoryId])
+  @@index([isAvailable])
+}
+
+model Court {
+  id           String    @id @default(cuid())
+  name         String    // "Court 1", "Court 2"
+  pricePerHour Int       // Price in cents/smallest currency unit
+  isActive     Boolean   @default(true)
+  bookings     Booking[]
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+}
+
+model Booking {
+  id           String        @id @default(cuid())
+  courtId      String
+  userId       String?       // Optional (Guest booking via Admin)
+  customerName String        // For manual admin entry
+  customerPhone String?      // Optional contact
+  date         DateTime      // Booking date
+  startTime    Int           // 0-23 (hour)
+  endTime      Int           // 0-23 (hour)
+  status       BookingStatus @default(CONFIRMED)
+  notes        String?       @db.Text
+  
+  court        Court         @relation(fields: [courtId], references: [id], onDelete: Cascade)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  
+  @@index([courtId])
+  @@index([date])
+  @@index([status])
+}

@@ -1,39 +1,32 @@
-import type { Metadata } from "next";
+"use client"
 
-export const metadata: Metadata = {
-  title: "Admin Dashboard",
-};
+import { useState } from 'react'
+import { SessionProvider } from 'next-auth/react'
+import { Sidebar } from '@/components/admin/Sidebar'
+import { AdminHeader } from '@/components/admin/AdminHeader'
 
 export default function AdminLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
-  return (
-    <div className="flex min-h-screen">
-      {/* Sidebar - Placeholder */}
-      <aside className="w-64 bg-neutral-900 text-white p-6">
-        <h2 className="font-playfair text-2xl font-bold mb-8">OOMA Admin</h2>
-        <nav className="space-y-2">
-          <a href="/admin" className="block px-4 py-2 rounded-lg hover:bg-neutral-800 transition-colors">
-            Dashboard
-          </a>
-          <a href="/admin/bookings" className="block px-4 py-2 rounded-lg hover:bg-neutral-800 transition-colors">
-            Bookings
-          </a>
-          <a href="/admin/menu" className="block px-4 py-2 rounded-lg hover:bg-neutral-800 transition-colors">
-            Menu Manager
-          </a>
-          <a href="/admin/courts" className="block px-4 py-2 rounded-lg hover:bg-neutral-800 transition-colors">
-            Courts
-          </a>
-        </nav>
-      </aside>
+  const [sidebarOpen, setSidebarOpen] = useState(false)
 
-      {/* Main Content */}
-      <main className="flex-1 bg-background p-8">
-        {children}
-      </main>
-    </div>
-  );
+  return (
+    <SessionProvider>
+      <div className="flex h-screen bg-sand-50">
+        {/* Sidebar */}
+        <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+
+        {/* Main Content */}
+        <div className="flex-1 flex flex-col overflow-hidden">
+          <AdminHeader onMenuClick={() => setSidebarOpen(true)} />
+
+          <main className="flex-1 overflow-y-auto p-4 lg:p-6">
+            {children}
+          </main>
+        </div>
+      </div>
+    </SessionProvider>
+  )
 }

@@ -1,7 +1,7 @@
 "use client"
 
-import { useState } from 'react'
-import { signIn } from 'next-auth/react'
+import { useState, useEffect } from 'react'
+import { signIn, useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { Input } from '@/components/ui/Input'
@@ -10,8 +10,15 @@ import { motion } from 'framer-motion'
 
 export default function AdminLoginPage() {
   const router = useRouter()
+  const { status } = useSession()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+
+  useEffect(() => {
+    if (status === 'authenticated') {
+      router.replace('/admin/dashboard')
+    }
+  }, [status, router])
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
@@ -30,8 +37,8 @@ export default function AdminLoginPage() {
       if (result?.error) {
         setError('Email atau password salah')
       } else {
-        router.push('/admin/dashboard')
         router.refresh()
+        router.replace('/admin/dashboard')
       }
     } catch (err) {
       setError('Terjadi kesalahan. Silakan coba lagi.')

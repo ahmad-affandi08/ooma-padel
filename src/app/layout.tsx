@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import { Geist_Mono } from "next/font/google";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
 import "./globals.css";
 
 // Sans-serif for body text (Clean, modern)
@@ -86,11 +84,7 @@ export default function RootLayout({
   return (
     <html lang="id" className={`${inter.variable} ${playfair.variable} ${geistMono.variable}`}>
       <body className="antialiased">
-        <Header />
-        <main>
-          {children}
-        </main>
-        <Footer />
+        {children}
       </body>
     </html>
   );

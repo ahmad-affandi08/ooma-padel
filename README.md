@@ -2,6 +2,8 @@
 
 ![OOMA Padel Banner](public/logohitam.png)
 
+> **[📄 Lihat Proposal / Presentasi Penjualan (Klik Disini)](./Presentasi.md)**
+
 Aplikasi web modern dan komprehensif untuk mengelola operasional OOMA Padel & Eatery. Sistem ini menangani segalanya mulai dari halaman landing publik hingga dashboard admin lengkap untuk mengelola menu, kategori, lapangan padel, dan reservasi.
 
 Dibangun dengan **Next.js 15 (App Router)**, **TypeScript**, **Tailwind CSS**, dan **Prisma ORM**.

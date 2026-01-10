@@ -48,35 +48,45 @@ export function Header() {
     <>
       <motion.header
         initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className={`fixed top-0 z-40 w-full transition-all duration-300 ${isScrolled
-          ? "bg-black/20 backdrop-blur-md border-b border-white/10 h-20"
-          : "bg-transparent border-transparent h-24"
-          }`}
+        animate={{
+          y: 0,
+          opacity: 1,
+          width: isScrolled ? "90%" : "100%",
+          maxWidth: isScrolled ? "1024px" : "100%",
+          top: isScrolled ? "1.5rem" : "0rem",
+          borderRadius: isScrolled ? "50px" : "0px",
+          backgroundColor: isScrolled ? "rgba(255, 255, 255, 0.1)" : "transparent",
+          backdropFilter: isScrolled ? "blur(16px)" : "none",
+          border: isScrolled ? "1px solid rgba(255, 255, 255, 0.2)" : "1px solid transparent",
+          height: isScrolled ? "70px" : "96px"
+        }}
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }} // smooth elastic-like spring
+        className={`fixed z-50 left-1/2 -translate-x-1/2 flex items-center transition-all`}
       >
-        <div className="container mx-auto flex h-full items-center justify-between px-4">
+        <div className="w-full h-full flex items-center justify-between px-6 md:px-8">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2, duration: 0.5 }}
-            className="flex flex-col items-center justify-center"
+            className="flex flex-col items-center justify-center shrink-0"
           >
             <a href="#" className="flex flex-col items-center justify-center cursor-pointer group">
-              <Image
-                src="/logohitam.png"
-                alt="OOMA Padel & Eatery"
-                width={100}
-                height={35}
-                className="h-7 md:h-9 w-auto object-contain transition-transform group-hover:scale-105 brightness-0 invert"
-                priority
-              />
+              <div>
+                <Image
+                  src="/logohitam.png"
+                  alt="OOMA Padel & Eatery"
+                  width={100}
+                  height={35}
+                  className={`h-7 md:h-9 w-auto object-contain transition-all duration-300 group-hover:scale-105 ${isScrolled ? "" : "brightness-0 invert"}`}
+                  priority
+                />
 
-              <p className="logo-tagline text-[0.6rem] md:text-[0.65rem] font-light text-white tracking-[0.25em] uppercase transition-colors group-hover:text-orange-200" style={{ fontFamily: "'Sackers Gothic', Georgia, serif" }}>
-                <span className="mx-1 text-white/60">•</span>
-                <span className="drop-cap">P</span>adel <span className="mx-0.5">&</span> <span className="drop-cap">E</span>eatery
-                <span className="mx-1 text-white/60">•</span>
-              </p>
+                <p className={`logo-tagline text-[0.6rem] md:text-[0.65rem] font-light tracking-[0.25em] uppercase transition-colors mt-1 ${isScrolled ? "text-primary-950 group-hover:text-primary-700" : "text-white group-hover:text-orange-200"}`} style={{ fontFamily: "'Sackers Gothic', Georgia, serif" }}>
+                  <span className={`mx-1 ${isScrolled ? "text-primary-950/60" : "text-white/60"}`}>•</span>
+                  <span className="drop-cap">P</span>adel <span className="mx-0.5">&</span> <span className="drop-cap">E</span>eatery
+                  <span className={`mx-1 ${isScrolled ? "text-primary-950/60" : "text-white/60"}`}>•</span>
+                </p>
+              </div>
             </a>
           </motion.div>
 
@@ -85,16 +95,17 @@ export function Header() {
               <a
                 key={link.href}
                 href={link.href}
-                className="text-sm font-medium uppercase tracking-widest text-white/90 hover:text-white transition-colors"
+                className={`text-sm font-medium uppercase tracking-widest transition-colors relative group ${isScrolled ? "text-primary-950 hover:text-primary-700" : "text-white hover:text-white/80"}`}
               >
                 {link.label}
+                <span className={`absolute -bottom-1 left-0 w-0 h-px transition-all duration-300 group-hover:w-full ${isScrolled ? "bg-primary-950" : "bg-white"}`}></span>
               </a>
             ))}
           </nav>
 
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 text-white hover:bg-white/10 rounded-lg transition-colors z-50"
+            className={`md:hidden p-2 rounded-full transition-colors z-50 shrink-0 ${isScrolled ? "text-primary-950 hover:bg-black/5" : "text-white hover:bg-white/10"}`}
             aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? (
@@ -116,8 +127,7 @@ export function Header() {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.2 }}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="fixed inset-0 bg-black/60 z-[998] md:hidden"
-                style={{ top: "80px" }}
+                className="fixed inset-0 bg-black/60 z-[40] md:hidden"
               />
 
               <motion.div
@@ -125,8 +135,7 @@ export function Header() {
                 animate={{ x: 0 }}
                 exit={{ x: "100%" }}
                 transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                className="fixed right-0 bottom-0 w-[75%] bg-[#1c1917] shadow-2xl z-[999] md:hidden border-l border-white/10 flex flex-col"
-                style={{ top: "80px" }}
+                className="fixed right-0 top-0 bottom-0 w-[75%] bg-[#1c1917] shadow-2xl z-[45] md:hidden border-l border-white/10 flex flex-col pt-28"
               >
                 <nav className="flex flex-col p-6 gap-2">
                   {navLinks.map((link, idx) => (

@@ -120,17 +120,11 @@ export function PublicMenuSection() {
                 >
                   {/* Image Section */}
                   <div className="relative h-48 md:h-56 bg-neutral-100 overflow-hidden">
-                    {item.imageUrl ? (
-                      <ImagePreview
-                        src={item.imageUrl}
-                        alt={item.name}
-                        className={`w-full h-full ${!item.isAvailable ? 'grayscale' : ''}`}
-                      />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-neutral-100 to-neutral-200">
-                        <span className="text-neutral-400 text-sm font-medium">No Image</span>
-                      </div>
-                    )}
+                    <ImagePreview
+                      src={item.imageUrl || "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&q=80&w=800"}
+                      alt={item.name}
+                      className={`w-full h-full ${!item.isAvailable ? 'grayscale' : ''}`}
+                    />
 
                     {/* Badges Overlay */}
                     <div className="absolute top-3 left-3 flex flex-col gap-2 pointer-events-none">

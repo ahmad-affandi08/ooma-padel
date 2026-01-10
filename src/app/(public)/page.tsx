@@ -21,7 +21,7 @@ export default function PublicHomePage() {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="relative min-h-[85vh] md:min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-primary-400 via-primary-500 to-secondary-600">
+      <section className="relative min-h-screen h-[100dvh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-primary-400 via-primary-500 to-secondary-600">
         {/* Animated Background Elements */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-20 left-10 w-48 h-48 md:w-72 md:h-72 bg-white/10 rounded-full mix-blend-overlay filter blur-xl opacity-70 animate-blob" />
@@ -51,7 +51,7 @@ export default function PublicHomePage() {
             />
             <p className="logo-tagline text-base md:text-2xl lg:text-4xl font-light text-white tracking-[0.25em] uppercase" style={{ fontFamily: "'Sackers Gothic', Georgia, serif" }}>
               <span className="mx-2 md:mx-3 lg:mx-4">•</span>
-              <span className="drop-cap">P</span>adel <span className="mx-1">&</span> <span className="drop-cap">E</span>eatery
+              <span className="drop-cap">P</span>adel <span className="mx-2">&</span> <span className="drop-cap">E</span>atery
               <span className="mx-2 md:mx-3 lg:mx-4">•</span>
             </p>
           </motion.div>

@@ -195,12 +195,6 @@ option {
   cursor: pointer;
 }
 
-/* Drop Cap Typography for Logo Tagline */
-.logo-tagline {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 0.25rem;
-}
 
 .logo-tagline .drop-cap {
   font-size: 1.5em;

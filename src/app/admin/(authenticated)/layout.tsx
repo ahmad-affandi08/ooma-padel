@@ -14,7 +14,7 @@ export default function AuthenticatedAdminLayout({
 
   return (
     <SessionProvider>
-      <div className="flex h-screen bg-sand-50">
+      <div className="flex h-screen bg-primary-100">
         <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
         <div className="flex-1 flex flex-col overflow-hidden">
           <AdminHeader onMenuClick={() => setSidebarOpen(true)} />

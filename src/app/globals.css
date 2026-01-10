@@ -95,21 +95,21 @@
 
 /* Custom CSS Variables for semantic colors */
 :root {
-  /* Background & Foreground */
-  --background: #faf8f5;
+  /* Background & Foreground - Clean White */
+  --background: #ffffff;
   --foreground: #1a1a1a;
 
-  /* Primary Colors - Menu Book Orange */
+  /* Primary Colors - OOMA Orange (Main Buttons) */
   --primary: #d96435;
   --primary-foreground: #ffffff;
 
-  /* Secondary Colors - Dark Wood */
-  --secondary: #624332;
-  --secondary-foreground: #ffffff;
+  /* Secondary Colors - Warm Cream/Beige */
+  --secondary: #bd9159;
+  --secondary-foreground: #1a1a1a;
 
-  /* Accent Colors - Soft Sand */
-  --accent: #e8ddc9;
-  --accent-foreground: #1a1a1a;
+  /* Accent Colors - Dark Wood */
+  --accent: #624332;
+  --accent-foreground: #ffffff;
 
   /* Neutral */
   --muted: #f5f5f5;

@@ -48,7 +48,7 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-sand-50 via-sage-50 to-terracotta-50 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-secondary-100 via-sage-50 to-terracotta-50 p-4">
       {/* Decorative Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-96 h-96 bg-sage-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
@@ -61,7 +61,7 @@ export default function AdminLoginPage() {
         transition={{ duration: 0.5 }}
         className="relative w-full max-w-md"
       >
-        <div className="bg-white rounded-3xl shadow-soft-lg p-8 md:p-10">
+        <div className="bg-secondary-200 rounded-3xl shadow-soft-lg p-8 md:p-10">
           {/* Logo */}
           <div className="flex flex-col items-center mb-8">
             <Image

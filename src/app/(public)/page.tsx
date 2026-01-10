@@ -21,12 +21,12 @@ export default function PublicHomePage() {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="relative min-h-[85vh] md:min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-primary-50 via-secondary-50 to-accent-50">
+      <section className="relative min-h-[85vh] md:min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-primary-400 via-primary-500 to-secondary-600">
         {/* Animated Background Elements */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-20 left-10 w-48 h-48 md:w-72 md:h-72 bg-primary-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob" />
-          <div className="absolute top-40 right-10 w-48 h-48 md:w-72 md:h-72 bg-secondary-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000" />
-          <div className="absolute -bottom-8 left-20 w-48 h-48 md:w-72 md:h-72 bg-accent-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000" />
+          <div className="absolute top-20 left-10 w-48 h-48 md:w-72 md:h-72 bg-white/10 rounded-full mix-blend-overlay filter blur-xl opacity-70 animate-blob" />
+          <div className="absolute top-40 right-10 w-48 h-48 md:w-72 md:h-72 bg-white/10 rounded-full mix-blend-overlay filter blur-xl opacity-70 animate-blob animation-delay-2000" />
+          <div className="absolute -bottom-8 left-20 w-48 h-48 md:w-72 md:h-72 bg-white/10 rounded-full mix-blend-overlay filter blur-xl opacity-70 animate-blob animation-delay-4000" />
         </div>
 
         <motion.div
@@ -46,12 +46,12 @@ export default function PublicHomePage() {
               alt="OOMA Padel & Eatery"
               width={600}
               height={180}
-              className="w-auto h-16 md:h-28 lg:h-36"
+              className="w-auto h-16 md:h-28 lg:h-36 brightness-0 invert"
               priority
             />
-            <p className="logo-tagline text-base md:text-2xl lg:text-4xl font-light text-black tracking-[0.25em] uppercase" style={{ fontFamily: "'Sackers Gothic', Georgia, serif" }}>
+            <p className="logo-tagline text-base md:text-2xl lg:text-4xl font-light text-white tracking-[0.25em] uppercase" style={{ fontFamily: "'Sackers Gothic', Georgia, serif" }}>
               <span className="mx-2 md:mx-3 lg:mx-4">•</span>
-              <span className="drop-cap">P</span>adel <span className="mx-1">&</span> <span className="drop-cap">E</span>atery
+              <span className="drop-cap">P</span>adel <span className="mx-1">&</span> <span className="drop-cap">E</span>eatery
               <span className="mx-2 md:mx-3 lg:mx-4">•</span>
             </p>
           </motion.div>
@@ -60,7 +60,7 @@ export default function PublicHomePage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4, duration: 0.8 }}
-            className="text-base md:text-xl lg:text-2xl text-neutral-700 mb-3 md:mb-4 font-light max-w-3xl mx-auto"
+            className="text-base md:text-xl lg:text-2xl text-white mb-3 md:mb-4 font-light max-w-3xl mx-auto"
           >
             Dimana Olahraga Bertemu Gaya Hidup
           </motion.p>
@@ -69,7 +69,7 @@ export default function PublicHomePage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6, duration: 0.8 }}
-            className="text-sm md:text-base lg:text-lg text-neutral-600 mb-8 md:mb-12 max-w-2xl mx-auto leading-relaxed px-2"
+            className="text-sm md:text-base lg:text-lg text-white/90 mb-8 md:mb-12 max-w-2xl mx-auto leading-relaxed px-2"
           >
             Rasakan lapangan padel premium dan kuliner organik dalam suasana hangat dan natural
           </motion.p>
@@ -82,14 +82,14 @@ export default function PublicHomePage() {
           >
             <a
               href="#booking"
-              className="group px-8 md:px-10 py-4 md:py-5 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-pill font-semibold text-base md:text-lg shadow-soft-lg hover:shadow-soft-md hover:from-primary-600 hover:to-primary-700 transition-all duration-300 transform hover:scale-105"
+              className="group px-8 md:px-10 py-4 md:py-5 bg-white text-primary-600 rounded-pill font-semibold text-base md:text-lg shadow-soft-lg hover:shadow-soft-md hover:bg-primary-50 transition-all duration-300 transform hover:scale-105"
             >
               Pesan Lapangan
               <span className="inline-block ml-2 group-hover:translate-x-1 transition-transform">→</span>
             </a>
             <a
               href="#menu"
-              className="px-8 md:px-10 py-4 md:py-5 bg-white text-primary-600 rounded-pill font-semibold text-base md:text-lg shadow-soft-lg hover:shadow-soft-md border-2 border-primary-200 hover:border-primary-400 transition-all duration-300"
+              className="px-8 md:px-10 py-4 md:py-5 bg-transparent text-white rounded-pill font-semibold text-base md:text-lg shadow-soft-lg hover:shadow-soft-md border-2 border-white hover:bg-white/10 transition-all duration-300"
             >
               Lihat Menu
             </a>
@@ -102,12 +102,12 @@ export default function PublicHomePage() {
           transition={{ delay: 1.3, duration: 0.8 }}
           className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce"
         >
-          <ChevronDown className="w-6 h-6 text-primary-600" />
+          <ChevronDown className="w-6 h-6 text-white" />
         </motion.div>
       </section >
 
       {/* About Section - Enhanced */}
-      < section id="about" className="py-32 px-4 bg-white relative overflow-hidden" >
+      < section id="about" className="py-32 px-4 bg-secondary-100 relative overflow-hidden" >
         <motion.div
           initial={{ opacity: 0, x: 100 }}
           whileInView={{ opacity: 0.5, x: 0 }}
@@ -199,22 +199,38 @@ export default function PublicHomePage() {
                 whileInView={{ opacity: 1, rotate: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.2, duration: 0.8 }}
-                className="aspect-square bg-gradient-to-br from-primary-100 to-secondary-200 rounded-3xl shadow-soft-lg"
-              ></motion.div>
+                className="aspect-square rounded-3xl shadow-soft-lg overflow-hidden"
+              >
+                <Image
+                  src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=800&q=80"
+                  alt="OOMA Cafe Interior"
+                  width={800}
+                  height={800}
+                  className="w-full h-full object-cover"
+                />
+              </motion.div>
               <motion.div
                 initial={{ opacity: 0, rotate: 5 }}
                 whileInView={{ opacity: 1, rotate: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.4, duration: 0.8 }}
-                className="absolute -bottom-6 -right-6 w-2/3 h-2/3 bg-gradient-to-br from-accent-100 to-accent-200 rounded-3xl shadow-soft-lg"
-              ></motion.div>
+                className="absolute -bottom-6 -right-6 w-2/3 h-2/3 rounded-3xl shadow-soft-lg overflow-hidden"
+              >
+                <Image
+                  src="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?w=600&q=80"
+                  alt="Healthy Food"
+                  width={600}
+                  height={600}
+                  className="w-full h-full object-cover"
+                />
+              </motion.div>
             </motion.div>
           </div>
         </div>
       </section >
 
       {/* Menu Highlight - Premium Grid */}
-      < section id="menu" className="py-32 px-4 bg-gradient-to-b from-secondary-50 to-white" >
+      < section id="menu" className="py-32 px-4 bg-primary-500">
         <div className="container mx-auto max-w-7xl">
           <div className="text-center mb-16">
             <motion.div
@@ -222,7 +238,7 @@ export default function PublicHomePage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.5 }}
-              className="inline-block px-4 py-2 bg-accent-50 rounded-pill text-accent-700 font-semibold text-sm mb-4"
+              className="inline-block px-4 py-2 bg-secondary-100 rounded-pill text-primary-800 font-semibold text-sm mb-4"
             >
               Menu Kami
             </motion.div>
@@ -231,7 +247,7 @@ export default function PublicHomePage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ delay: 0.1, duration: 0.6 }}
-              className="font-playfair text-5xl md:text-6xl font-bold text-primary-800 mb-6"
+              className="font-playfair text-5xl md:text-6xl font-bold text-secondary-300 mb-6"
             >
               Organik & Artisan
             </motion.h2>
@@ -240,7 +256,7 @@ export default function PublicHomePage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ delay: 0.2, duration: 0.6 }}
-              className="text-lg text-neutral-600 max-w-2xl mx-auto"
+              className="text-lg text-secondary-100 max-w-2xl mx-auto"
             >
               Setiap hidangan dibuat dengan bahan-bahan organik yang bersumber lokal.
               Dari smoothie yang menyegarkan hingga makanan yang mengenyangkan, kami mendukung gaya hidup aktif Anda.
@@ -254,7 +270,7 @@ export default function PublicHomePage() {
       </section >
 
       {/* Courts Section - Visual Showcase */}
-      < section id="courts" className="py-32 px-4 bg-white" >
+      < section id="courts" className="py-32 px-4 bg-secondary-100" >
         <div className="container mx-auto max-w-7xl">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <motion.div
@@ -269,15 +285,31 @@ export default function PublicHomePage() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.2, duration: 0.8 }}
-                className="aspect-video bg-gradient-to-br from-primary-200 to-primary-400 rounded-3xl shadow-soft-lg"
-              ></motion.div>
+                className="aspect-video rounded-3xl shadow-soft-lg overflow-hidden"
+              >
+                <Image
+                  src="https://images.unsplash.com/photo-1554068865-24cecd4e34b8?w=1200&q=80"
+                  alt="Padel Court"
+                  width={1200}
+                  height={675}
+                  className="w-full h-full object-cover"
+                />
+              </motion.div>
               <motion.div
                 initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
                 whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.4, duration: 0.8 }}
-                className="absolute -top-6 -left-6 w-1/2 h-1/2 bg-gradient-to-br from-accent-200 to-accent-300 rounded-3xl shadow-soft"
-              ></motion.div>
+                className="absolute -top-6 -left-6 w-1/2 h-1/2 rounded-3xl shadow-soft overflow-hidden"
+              >
+                <Image
+                  src="https://images.unsplash.com/photo-1622163642998-1ea32b0bbc67?w=600&q=80"
+                  alt="Padel Players"
+                  width={600}
+                  height={600}
+                  className="w-full h-full object-cover"
+                />
+              </motion.div>
             </motion.div>
 
             <div className="order-1 md:order-2 space-y-6">
@@ -340,7 +372,7 @@ export default function PublicHomePage() {
       </section >
 
       {/* Location Map Section */}
-      < section className="py-32 px-4 bg-secondary-50" >
+      < section className="py-32 px-4 bg-primary-500" >
         <div className="container mx-auto max-w-7xl">
           <div className="text-center mb-12">
             <motion.div
@@ -357,17 +389,17 @@ export default function PublicHomePage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ delay: 0.1, duration: 0.6 }}
-              className="font-playfair text-5xl md:text-6xl font-bold text-primary-800 mb-6"
+              className="font-playfair text-5xl md:text-6xl font-bold text-secondary-300 mb-6"
             >
               Temukan Kami di
-              <span className="block text-accent-600">Sragen, Jawa Tengah</span>
+              <span className="block text-secondary-100">Sragen, Jawa Tengah</span>
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ delay: 0.2, duration: 0.6 }}
-              className="text-lg text-neutral-600 max-w-2xl mx-auto mb-8"
+              className="text-lg text-secondary-200 max-w-2xl mx-auto mb-8"
             >
               Jl. Gatot Subroto, Kebayan 1, Sragen Kulon, Kec. Sragen, Kabupaten Sragen, Jawa Tengah 57212
             </motion.p>
@@ -436,9 +468,7 @@ export default function PublicHomePage() {
       </section >
 
       {/* Booking CTA - Dramatic */}
-      < section id="booking" className="relative py-32 px-4 overflow-hidden" >
-        <div className="absolute inset-0 bg-gradient-to-br from-primary-600 via-primary-700 to-accent-700"></div>
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMzLjMxNCAwIDYgMi42ODYgNiA2cy0yLjY4NiA2LTYgNi02LTIuNjg2LTYtNiAyLjY4Ni02IDYtNnptMCAzNmMzLjMxNCAwIDYgMi42ODYgNiA2cy0yLjY4NiA2LTYgNi02LTIuNjg2LTYtNiAyLjY4Ni02IDYtNnptLTE4LTE4YzMuMzE0IDAgNiAyLjY4NiA2IDZzLTIuNjg2IDYtNiA2LTYtMi42ODYtNi02IDIuNjg2LTYgNi02eiIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjEiIG9wYWNpdHk9Ii4xIi8+PC9nPjwvc3ZnPg==')] opacity-10"></div>
+      < section id="booking" className="relative py-32 px-4 overflow-hidden bg-secondary-100" >
 
         <div className="container mx-auto max-w-4xl text-center relative z-10">
           <motion.h2
@@ -446,7 +476,7 @@ export default function PublicHomePage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6 }}
-            className="font-playfair text-5xl md:text-7xl font-bold text-white mb-6 leading-tight"
+            className="font-playfair text-5xl md:text-7xl font-bold text-primary-800 mb-6 leading-tight"
           >
             Siap Bermain?
           </motion.h2>
@@ -455,10 +485,10 @@ export default function PublicHomePage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ delay: 0.2, duration: 0.6 }}
-            className="text-xl md:text-2xl text-white/90 mb-12 leading-relaxed"
+            className="text-xl md:text-2xl text-neutral-600 mb-12 leading-relaxed"
           >
             Pesan lapangan Anda sekarang dan rasakan perbedaan OOMA.
-            <span className="block mt-2 text-lg text-white/80">
+            <span className="block mt-2 text-lg text-neutral-500">
               Fasilitas premium • Kuliner organik • Pengalaman tak terlupakan
             </span>
           </motion.p>
@@ -473,7 +503,7 @@ export default function PublicHomePage() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="group px-10 py-5 bg-white text-primary-600 rounded-pill font-bold text-lg shadow-soft-lg hover:shadow-soft-md transition-all duration-300"
+              className="group px-10 py-5 bg-primary-600 text-white rounded-pill font-bold text-lg shadow-soft-lg hover:shadow-soft-md transition-all duration-300"
             >
               <span className="flex items-center justify-center gap-2">
                 Pesan Sekarang
@@ -483,7 +513,7 @@ export default function PublicHomePage() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-10 py-5 border-2 border-white text-white rounded-pill font-bold text-lg hover:bg-white/10 transition-all duration-300"
+              className="px-10 py-5 border-2 border-primary-600 text-primary-600 rounded-pill font-bold text-lg hover:bg-primary-50 transition-all duration-300"
             >
               Hubungi Kami
             </motion.button>
@@ -507,10 +537,10 @@ export default function PublicHomePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.6 + idx * 0.1, duration: 0.5 }}
-                className="text-white/90"
+                className="text-primary-800"
               >
                 <div className="text-3xl font-bold font-playfair">{item.value}</div>
-                <div className="text-sm mt-1 text-white/70">{item.label}</div>
+                <div className="text-sm mt-1 text-neutral-600">{item.label}</div>
               </motion.div>
             ))}
           </motion.div>

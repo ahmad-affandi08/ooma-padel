@@ -80,8 +80,8 @@ export function PublicMenuSection() {
             className={`
               px-5 md:px-7 py-2.5 md:py-3 rounded-full font-semibold transition-all duration-300 text-sm md:text-base
               ${activeCategory === category.id
-                ? 'bg-orange-600 text-white shadow-lg scale-105'
-                : 'bg-white text-neutral-600 hover:bg-orange-50 border border-neutral-200'
+                ? 'bg-gradient-to-b from-secondary-200 to-secondary-300 text-primary-900 shadow-[inset_0_2px_8px_rgba(0,0,0,0.15),0_4px_12px_rgba(0,0,0,0.2)] scale-105 border-2 border-secondary-400 transform translate-y-[-2px]'
+                : 'bg-white text-neutral-600 hover:bg-secondary-50 border border-white/50 shadow-md hover:shadow-lg'
               }
             `}
           >
